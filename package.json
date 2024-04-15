@@ -11,6 +11,10 @@
     "format:fix": "prettier --write --list-different ."
   },
   "dependencies": {
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/material": "^5.15.15",
     "@types/aos": "^3.0.7",
     "aos": "^2.3.4",
     "gsap": "^3.12.5",

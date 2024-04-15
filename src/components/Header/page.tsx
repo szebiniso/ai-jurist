@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -23,9 +24,12 @@ const Header = () => {
       </div>
 
       <div className="flex gap-4 items-center">
-        <button className="border rounded-full text-c-white py-2 px-4">
-          Get started
-        </button>
+        <Link href="/login">
+          <button className="border rounded-full text-c-white py-2 px-4">
+            Get started
+          </button>
+        </Link>
+
         <div className="border rounded-full p-2">
           <Image
             src={"/icons/Avatar.svg"}
