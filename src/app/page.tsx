@@ -15,7 +15,7 @@ export default function Home() {
       <Product />
       <Cards />
       <Experts />
-      <Mockup />
+      {/*<Mockup />*/}
       <InfiniteLogoSlider />
       <Footer />
     </main>

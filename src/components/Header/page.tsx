@@ -9,16 +9,10 @@ const Header = () => {
         <Image src={"/images/Logo.svg"} alt="/" width={140} height={20} />
         <ul className="flex justify-between gap-16 text-sm">
           <li className="text-gray-400 hover:text-c-white cursor-pointer">
-            HOME
+            ЧАТ
           </li>
           <li className="text-gray-400 hover:text-c-white cursor-pointer">
-            FEATURES
-          </li>
-          <li className="text-gray-400 hover:text-c-white cursor-pointer">
-            DEMO
-          </li>
-          <li className="text-gray-400 hover:text-c-white cursor-pointer">
-            ABOUT US
+            СПЕЦИАЛИСТЫ
           </li>
         </ul>
       </div>
@@ -30,14 +24,14 @@ const Header = () => {
           </button>
         </Link>
 
-        <div className="border rounded-full p-2">
-          <Image
-            src={"/icons/Avatar.svg"}
-            alt="avatar"
-            width={24}
-            height={24}
-          />
-        </div>
+        {/*<div className="border rounded-full p-2">*/}
+        {/*  <Image*/}
+        {/*    src={"/icons/Avatar.svg"}*/}
+        {/*    alt="avatar"*/}
+        {/*    width={24}*/}
+        {/*    height={24}*/}
+        {/*  />*/}
+        {/*</div>*/}
       </div>
     </div>
   );
