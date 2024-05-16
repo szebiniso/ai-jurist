@@ -9,7 +9,7 @@ const ChatPanel = () => {
         {/*  +*/}
         {/*</div>*/}
         <input
-          className="bg-[#262626] rounded-2xl p-4 w-full"
+          className="bg-[#262626] rounded-2xl p-4 w-full text-white"
           placeholder="Enter your prompt"
         />
         <Image
