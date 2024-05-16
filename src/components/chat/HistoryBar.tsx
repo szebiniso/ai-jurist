@@ -12,7 +12,7 @@ const HistoryBar = () => {
           <div className="flex flex-col gap-2" key={history.title}>
             <p className="text-gray-500">{history.title}</p>
             {history.list.map((item) => (
-              <p className="text-white" key={item}>
+              <p className="text-white text-sm" key={item}>
                 {item}
               </p>
             ))}
