@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import Input from "@/components/UI/Input";
 import Button from "@/components/UI/Button";
+import { useRouter } from "next/router";
 
 const Login = () => {
   return (
@@ -25,7 +26,9 @@ const Login = () => {
             <Input label="Почта" name="email" placeholder="exemple@gmail.com" />
             <Input label="Пароль" name="password" placeholder="*******" />
           </div>
-          <Button text="Войти" />
+          <Link href="/chat">
+            <Button text="Войти" />
+          </Link>
           <div className="flex justify-between text-c-gray text-sm mt-12 font-light">
             <Link href="/login">Забыли пароль ?</Link>
             <Link href="/register">Регистрация</Link>

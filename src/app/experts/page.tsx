@@ -1,19 +1,19 @@
 import React from "react";
-import Filters from "@/components/ExpertComponents/Filters";
 import Header from "@/components/Header/page";
-import { categoriesList } from "@/app/experts/constant";
-import Card from "@/components/ExpertComponents/Card";
+import Filters from "@/components/CategoryComponents/Filters";
+import { expertsList } from "@/constants/userApp/experts";
+import ExpertCard from "@/components/CategoryComponents/ExpertCard";
 
-const Experts = () => {
+const Page = () => {
   return (
     <div className="bg-black h-fit">
       <Header />
       <div className="w-full flex flex-col items-center">
         <div className="w-10/12">
           <Filters />
-          <div className="flex gap-10 flex-wrap justify-between my-16">
-            {categoriesList.map((category) => (
-              <Card key={category.id} category={category} />
+          <div className="flex gap-4 flex-wrap justify-between my-16">
+            {expertsList.map((expert) => (
+              <ExpertCard key={expert.id} expert={expert} />
             ))}
           </div>
         </div>
@@ -22,4 +22,4 @@ const Experts = () => {
   );
 };
 
-export default Experts;
+export default Page;

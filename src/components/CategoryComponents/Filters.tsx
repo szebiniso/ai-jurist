@@ -17,7 +17,10 @@ const Filters = () => {
   return (
     <div className="flex gap-4 text-white">
       {filtersData.map(({ id, title }) => (
-        <p className="border border-gray-400 p-2 rounded-2xl" key={id}>
+        <p
+          className="border border-gray-600 p-2 rounded-3xl cursor-pointer"
+          key={id}
+        >
           {title}
         </p>
       ))}

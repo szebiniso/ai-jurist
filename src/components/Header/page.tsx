@@ -9,10 +9,10 @@ const Header = () => {
         <Image src={"/images/Logo.svg"} alt="/" width={140} height={20} />
         <ul className="flex justify-between gap-16 text-sm">
           <li className="text-gray-400 hover:text-c-white cursor-pointer">
-            ЧАТ
+            <Link href="/chat">ЧАТ</Link>
           </li>
           <li className="text-gray-400 hover:text-c-white cursor-pointer">
-            СПЕЦИАЛИСТЫ
+            <Link href="/categories">СПЕЦИАЛИСТЫ</Link>
           </li>
         </ul>
       </div>
