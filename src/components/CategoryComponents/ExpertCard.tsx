@@ -10,7 +10,11 @@ type TProps = {
 const Card: FC<TProps> = ({ expert }) => {
   return (
     <Link href="/experts/2" className="flex flex-col gap-1 w-1/5">
-      <img className="rounded-2xl" src={expert.photo} alt="/" />
+      <img
+        className="rounded-2xl w-[200px] h-[200px] object-cover"
+        src={expert.photo}
+        alt="/"
+      />
       <h3 className="text-white text-xl">{expert.name}</h3>
       <p className="text-gray-500">{expert.type}</p>
     </Link>

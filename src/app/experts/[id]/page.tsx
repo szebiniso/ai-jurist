@@ -9,7 +9,7 @@ const Expert = () => {
       <div className="w-full flex flex-col items-center">
         <div className="flex gap-6 w-8/12">
           <img
-            className="w-[350px] rounded-3xl"
+            className="w-[350px] h-[200] rounded-3xl"
             src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
             alt="/"
           />
