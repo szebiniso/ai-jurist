@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import AosRegistry from "@/config/AosRegistry";
+import Providers from "@/providers/StoreProvider";
+import ToastProvider from "@/providers/ToastProvider";
+import { ReactNode } from "react";
 
 const inter = Inter({ subsets: ["greek"] });
 
@@ -14,7 +17,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="en">
@@ -30,7 +33,9 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <AosRegistry />
-        {children}
+        <Providers>
+          <ToastProvider>{children}</ToastProvider>
+        </Providers>
       </body>
     </html>
   );
