@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import Providers from "@/providers/StoreProvider";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import AosRegistry from "@/config/AosRegistry";
-import Providers from "@/providers/StoreProvider";
 import ToastProvider from "@/providers/ToastProvider";
 import { ReactNode } from "react";
+import AuthRedirectProvider from "@/providers/AuthRedirectProvider";
 
 const inter = Inter({ subsets: ["greek"] });
 
@@ -34,7 +35,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <AosRegistry />
         <Providers>
-          <ToastProvider>{children}</ToastProvider>
+          <AuthRedirectProvider>
+            <ToastProvider>{children}</ToastProvider>
+          </AuthRedirectProvider>
         </Providers>
       </body>
     </html>

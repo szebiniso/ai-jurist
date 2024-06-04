@@ -11,18 +11,21 @@ import { LoginUser } from "@/shared/types/aijusrist";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/shared/zod";
 import { useAppDispatch } from "@/redux/hooks";
-import { login } from "@/redux/features/users/reducer";
+import { useRouter } from "next/navigation";
+import { login } from "@/redux/features/auth/reducer";
+import { useSelector } from "react-redux";
+import { selectUsersList } from "@/redux/features/users/slice";
 
 const Login = () => {
   const dispatch = useAppDispatch();
-
+  const router = useRouter();
   const { control, handleSubmit } = useForm<LoginUser>({
     resolver: zodResolver(loginSchema),
   });
 
   const onLogin = (data: LoginUser) => {
-    console.log({ data });
     dispatch(login(data));
+    router.push("/experts");
   };
 
   return (

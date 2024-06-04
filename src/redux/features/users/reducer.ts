@@ -1,18 +1,24 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { LoginUser } from "@/shared/types/aijusrist";
 import api from "@/redux/service/api/api";
-import { toastError, toastSuccess } from "@/components/Toasts/toastify";
+import { TUsersParams } from "@/shared/types/customTypes";
 
-export const login = createAsyncThunk(
-  "account/login",
-  async (data: LoginUser) => {
+export const getUsersList = createAsyncThunk(
+  "users/getUsersList",
+  async (params: TUsersParams) => {
     try {
-      const response = await api.auth.login(data);
-      toastSuccess("You successfully logged in!");
-      return response;
+      const response = await api.users.getUsersList(params);
+      return response.data;
     } catch (error) {
-      toastError("Incorrect email or password!");
       throw error;
     }
   },
 );
+
+export const getUser = createAsyncThunk("users/getUser", async (id: string) => {
+  try {
+    const response = await api.users.getUserById(id);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+});
