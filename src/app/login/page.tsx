@@ -13,8 +13,6 @@ import { loginSchema } from "@/shared/zod";
 import { useAppDispatch } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
 import { login } from "@/redux/features/auth/reducer";
-import { useSelector } from "react-redux";
-import { selectUsersList } from "@/redux/features/users/slice";
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -24,8 +22,11 @@ const Login = () => {
   });
 
   const onLogin = (data: LoginUser) => {
-    dispatch(login(data));
-    router.push("/experts");
+    dispatch(login(data))
+      .unwrap()
+      .then(() => {
+        router.push("/experts");
+      });
   };
 
   return (

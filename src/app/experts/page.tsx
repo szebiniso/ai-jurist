@@ -3,7 +3,6 @@
 import React, { useEffect } from "react";
 import Header from "@/components/Header/page";
 import Filters from "@/components/CategoryComponents/Filters";
-import { expertsList } from "@/constants/userApp/experts";
 import ExpertCard from "@/components/CategoryComponents/ExpertCard";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
