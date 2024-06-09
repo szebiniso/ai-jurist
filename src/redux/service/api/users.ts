@@ -1,9 +1,10 @@
 import { client } from "@/redux/service/axios";
 import { TUsersParams } from "@/shared/types/customTypes";
+import { User } from "@/shared/types/aijusrist";
 
 const users = "users";
 
-class User {
+class Users {
   getUsersList(params: TUsersParams) {
     return client.get<User[]>(`${users}/users/`, {
       params,
@@ -14,4 +15,4 @@ class User {
   }
 }
 
-export default User;
+export default Users;
