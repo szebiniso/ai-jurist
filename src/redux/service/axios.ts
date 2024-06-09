@@ -1,3 +1,5 @@
+"use client";
+
 import axios from "axios";
 import { logout, setToken } from "@/redux/features/auth/slice";
 import { store } from "@/redux/store";

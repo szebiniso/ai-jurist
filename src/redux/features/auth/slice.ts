@@ -1,3 +1,5 @@
+"use client";
+
 import { createSlice } from "@reduxjs/toolkit";
 import { TAccount } from "@/shared/types/customTypes";
 

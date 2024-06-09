@@ -1,3 +1,5 @@
+"use client";
+
 import { TAccount } from "@/shared/types/customTypes";
 import { usePathname } from "next/navigation";
 

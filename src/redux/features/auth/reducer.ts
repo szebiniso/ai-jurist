@@ -1,3 +1,5 @@
+"use client";
+
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { LoginUser } from "@/shared/types/aijusrist";
 import api from "@/redux/service/api/api";
