@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import Header from "@/components/Header/page";
 import Filters from "@/components/CategoryComponents/Filters";
 import ExpertCard from "@/components/CategoryComponents/ExpertCard";
@@ -21,19 +21,21 @@ const Page = () => {
   }, []);
 
   return (
-    <div className="bg-black min-h-screen">
-      <Header />
-      <div className="w-full flex flex-col items-center">
-        <div className="w-10/12">
-          <Filters />
-          <div className="flex gap-8 flex-wrap my-16">
-            {usersList.map((expert) => (
-              <ExpertCard key={expert.id} expert={expert} />
-            ))}
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="bg-black min-h-screen">
+        <Header />
+        <div className="w-full flex flex-col items-center">
+          <div className="w-10/12">
+            <Filters />
+            <div className="flex gap-8 flex-wrap my-16">
+              {usersList.map((expert) => (
+                <ExpertCard key={expert.id} expert={expert} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Suspense>
   );
 };
 
