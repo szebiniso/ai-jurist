@@ -1,8 +1,9 @@
 import { client } from "@/redux/service/axios";
-import { ChatRoom, User } from "@/shared/types/aijusrist";
+import { ChatMessage, ChatRoom, User } from "@/shared/types/aijusrist";
+import { TChatMessagesParams } from "@/shared/types/customTypes";
 
 const chatroom = "chat/chatroom/";
-const chat = "chat/chat";
+const chat = "chat/chatbot/";
 
 class Chat {
   getChatRoomList() {
@@ -13,6 +14,13 @@ class Chat {
   }
   addChatRoom(data: Partial<ChatRoom>) {
     return client.post<ChatRoom>(chatroom, data);
+  }
+
+  getChatMessagesList(params: TChatMessagesParams) {
+    return client.get<ChatMessage[]>(chat, { params });
+  }
+  addChatMessage(data: Partial<ChatMessage>) {
+    return client.post<ChatMessage>(chat, data);
   }
 }
 

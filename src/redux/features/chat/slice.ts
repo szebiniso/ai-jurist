@@ -1,6 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ChatRoom } from "@/shared/types/aijusrist";
-import { getChatRoomList } from "@/redux/features/chat/reducer";
+import { ChatMessage, ChatRoom } from "@/shared/types/aijusrist";
+import {
+  getChatMessagesList,
+  getChatRoomList,
+} from "@/redux/features/chat/reducer";
 
 interface ChatState {
   chatroomList: {
@@ -8,6 +11,12 @@ interface ChatState {
     error?: string | null;
     success: boolean;
     chatroomList: ChatRoom[];
+  };
+  chatMessagesList: {
+    loading: boolean;
+    error?: string | null;
+    success: boolean;
+    chatMessagesList: ChatMessage[];
   };
 }
 
@@ -17,6 +26,12 @@ const initialState: ChatState = {
     error: null,
     success: false,
     chatroomList: [],
+  },
+  chatMessagesList: {
+    loading: false,
+    error: null,
+    success: false,
+    chatMessagesList: [],
   },
 };
 
@@ -40,6 +55,22 @@ const chatSlice = createSlice({
       state.chatroomList.loading = false;
       state.chatroomList.error = action.error.message;
       state.chatroomList.success = false;
+    });
+    builder.addCase(getChatMessagesList.pending, (state, action) => {
+      state.chatMessagesList.loading = true;
+      state.chatMessagesList.error = null;
+      state.chatMessagesList.success = false;
+    });
+    builder.addCase(getChatMessagesList.fulfilled, (state, action) => {
+      state.chatMessagesList.loading = false;
+      state.chatMessagesList.error = null;
+      state.chatMessagesList.success = true;
+      state.chatMessagesList.chatMessagesList = action.payload;
+    });
+    builder.addCase(getChatMessagesList.rejected, (state, action) => {
+      state.chatMessagesList.loading = false;
+      state.chatMessagesList.error = action.error.message;
+      state.chatMessagesList.success = false;
     });
   },
 });

@@ -21,12 +21,12 @@ const Page = () => {
   }, []);
 
   return (
-    <div className="bg-black h-screen">
+    <div className="bg-black min-h-screen">
       <Header />
       <div className="w-full flex flex-col items-center">
         <div className="w-10/12">
           <Filters />
-          <div className="flex gap-4 flex-wrap justify-between my-16">
+          <div className="flex gap-8 flex-wrap my-16">
             {usersList.map((expert) => (
               <ExpertCard key={expert.id} expert={expert} />
             ))}

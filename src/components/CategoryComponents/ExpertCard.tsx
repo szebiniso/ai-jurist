@@ -8,7 +8,7 @@ type TProps = {
 
 const Card: FC<TProps> = ({ expert }) => {
   return (
-    <Link href={`/experts/${expert.id}`} className="flex flex-col gap-1 w-1/5">
+    <Link href={`/experts/${expert.id}`} className="flex flex-col gap-2 w-1/7">
       <img
         className="rounded-2xl w-[200px] h-[200px] object-cover"
         src={

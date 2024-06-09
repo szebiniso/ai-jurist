@@ -29,6 +29,7 @@ import {
 import { Box, Tab, Tabs } from "@mui/material";
 import { TConsultationParams } from "@/shared/types/customTypes";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import Header from "@/components/Header/page";
 
 const Page = () => {
   const dispatch = useAppDispatch();
@@ -156,12 +157,13 @@ const Page = () => {
 
   return (
     <div className="h-screen bg-black">
+      <Header />
       <div className=" w-10/12 m-auto pt-10">
         <div>
           <Tabs onChange={onChangeTab}>
             {filtersData.map(({ id, title }) => (
               <Tab
-                sx={{ color: "white" }}
+                sx={{ color: "white", marginRight: "10px" }}
                 className="text-white"
                 key={id}
                 label={title}

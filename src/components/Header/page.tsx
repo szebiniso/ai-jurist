@@ -3,22 +3,34 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useAppDispatch } from "@/redux/hooks";
+import { logout } from "@/redux/features/auth/slice";
 
 const Header = () => {
   const path = usePathname();
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const logoutFromAccount = () => {
+    dispatch(logout());
+    router.push("/login");
+  };
 
   return (
     <div className="flex items-center justify-between p-12">
       <div className="flex items-center gap-24">
         <Image src={"/images/Logo.svg"} alt="/" width={140} height={20} />
-        {path !== "/" && (
-          <ul className="flex justify-between gap-16 text-sm">
-            <li className="text-gray-400 hover:text-c-white cursor-pointer">
+        {path !== "/" && path !== "/appointments" && (
+          <ul className="flex justify-between gap-8 text-sm">
+            <li
+              className={`text-gray-400 hover:text-c-white cursor-pointer px-4 py-2 ${path === "/chat" && "bg-gray-800 text-white rounded-xl"}`}
+            >
               <Link href="/chat">ЧАТ</Link>
             </li>
-            <li className="text-gray-400 hover:text-c-white cursor-pointer">
-              <Link href="/categories">СПЕЦИАЛИСТЫ</Link>
+            <li
+              className={`text-gray-400 hover:text-c-white cursor-pointer px-4 py-2 ${path === "/experts" && "bg-gray-800 text-white rounded-xl"}`}
+            >
+              <Link href="/experts">СПЕЦИАЛИСТЫ</Link>
             </li>
           </ul>
         )}
@@ -28,18 +40,16 @@ const Header = () => {
         {path === "/" ? (
           <Link href="/login">
             <button className="border rounded-full text-c-white py-2 px-4">
-              Get started
+              Начать
             </button>
           </Link>
         ) : (
-          <div className="border rounded-full p-2">
-            <Image
-              src={"/icons/Avatar.svg"}
-              alt="avatar"
-              width={24}
-              height={24}
-            />
-          </div>
+          <button
+            onClick={logoutFromAccount}
+            className="border rounded-full text-c-white py-2 px-4"
+          >
+            Выйти
+          </button>
         )}
       </div>
     </div>

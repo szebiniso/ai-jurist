@@ -18,6 +18,7 @@ const HistoryBar = () => {
   const [chatRoomName, setChatRoomName] = useState<string>("");
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  const room_id = searchParams.get("room");
   const { replace } = useRouter();
   const toggleOpenModal = () => setOpenModal(!openModal);
 
@@ -44,19 +45,24 @@ const HistoryBar = () => {
     dispatch(getChatRoomList());
   }, []);
 
+  useEffect(() => {
+    params.set("room", `${chatRoomList[0]?.id}`);
+    replace(`${pathname}?${params.toString()}`);
+  }, [chatRoomList]);
+
   return (
-    <div className="rounded-2xl p-6 bg-[#111517] w-fit h-[600px] flex flex-col gap-6">
+    <div className="rounded-2xl p-6 bg-[#111517] w-80 h-[600px] flex flex-col gap-6">
       <button
         onClick={toggleOpenModal}
         className="border text-white p-4 rounded-2xl border-gray-600"
       >
-        + New chat
+        + новый чат
       </button>
       <div className="flex flex-col gap-4">
         {chatRoomList.map((history) => (
           <p
             onClick={() => onChooseChatRoom(history.id)}
-            className="text-white text-sm cursor-pointer"
+            className={`text-white text-sm cursor-pointer px-4 py-2 ${+room_id! === history.id && "bg-gray-800 rounded-xl"}`}
             key={history.id}
           >
             {history.name}
@@ -65,7 +71,7 @@ const HistoryBar = () => {
       </div>
       <CModal open={openModal} closeModal={toggleOpenModal}>
         <div className="flex flex-col gap-4">
-          <h2 className="text-2xl text-center">Create new room</h2>
+          <h2 className="text-2xl text-center">Создать новую комнату</h2>
           <input
             className="rounded-xl p-4"
             onChange={(e) => setChatRoomName(e.target.value)}
@@ -75,7 +81,7 @@ const HistoryBar = () => {
             onClick={createNewChatRoom}
             className="border-gray-900 p-4 bg-gray-700 text-white rounded-xl"
           >
-            CREATE
+            СОЗДАТЬ
           </button>
         </div>
       </CModal>

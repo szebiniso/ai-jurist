@@ -36,16 +36,12 @@ const Table: React.FC<TableProps> = ({
   renderCell,
   onRowClick,
   openDelete,
-  isInDetail,
-  containerClassName,
-  onHeadCheckClick,
-  isAllChecked,
 }) => {
   return (
     <div className="bg-gray-400 min-w-8/11">
       <div className="">
         <MuiTable className="">
-          <TableHead style={{ width: "100%" }}>
+          <TableHead style={{ width: "100%", background: "#696e76" }}>
             <TableRow>
               {columns.map((column) => {
                 return (
@@ -61,7 +57,7 @@ const Table: React.FC<TableProps> = ({
           <TableBody>
             {data?.map((row, index) => (
               <TableRow
-                sx={{ marginTop: "5px" }}
+                sx={{ marginTop: "5px", background: "#aeb2b9" }}
                 key={row.id}
                 onClick={() => onRowClick?.(row)}
               >

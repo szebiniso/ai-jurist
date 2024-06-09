@@ -8,7 +8,7 @@ export const useAuthRedirect = () => {
     ? (JSON.parse(storedAccount) as TAccount)
     : null;
 
-  const pagesWithoutAuth = ["/login", "/register"];
+  const pagesWithoutAuth = ["/login", "/register", "/"];
 
   if (profile == null) {
     if (pagesWithoutAuth.includes(pathname)) return;

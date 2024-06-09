@@ -21,3 +21,8 @@ export type TUsersParams = {
 export type TConsultationParams = {
   status?: StatusEnum;
 };
+
+export type TChatMessagesParams = {
+  room?: number;
+  user?: number;
+};
