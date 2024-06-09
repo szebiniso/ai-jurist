@@ -1,31 +1,24 @@
 "use client";
 
-import { Modal } from "flowbite-react";
 import { FC, PropsWithChildren } from "react";
+import { Dialog, DialogContent } from "@mui/material";
 
 type TProps = {
   open: boolean;
   closeModal: () => void;
-  title: string;
 };
 
 const CModal: FC<TProps & PropsWithChildren> = ({
   open,
   closeModal,
   children,
-  title,
 }) => {
   return (
-    <Modal
-      size="md"
-      className="h-screen bg-black flex items-center justify-center"
-      show={open}
-      onClose={closeModal}
-    >
-      <div className="w-1/2 m-auto h-full items-center">
-        <Modal.Body className="opacity-100">{children}</Modal.Body>
+    <Dialog fullWidth open={open} onClose={closeModal}>
+      <div className="bg-gray-400 m-auto w-full h-full items-center">
+        <DialogContent className="opacity-100">{children}</DialogContent>
       </div>
-    </Modal>
+    </Dialog>
   );
 };
 

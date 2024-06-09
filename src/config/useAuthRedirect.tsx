@@ -1,6 +1,8 @@
 import { TAccount } from "@/shared/types/customTypes";
+import { usePathname } from "next/navigation";
 
-export const useAuthRedirect = ({ pathname }: Location) => {
+export const useAuthRedirect = () => {
+  const pathname = usePathname();
   const storedAccount = localStorage.getItem("account");
   const profile = storedAccount
     ? (JSON.parse(storedAccount) as TAccount)
@@ -16,6 +18,6 @@ export const useAuthRedirect = ({ pathname }: Location) => {
     if (profile.user_role === "client") {
       return "/chat";
     }
-    return "/experts";
+    return "/appointments";
   }
 };

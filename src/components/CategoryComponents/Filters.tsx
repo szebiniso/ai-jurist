@@ -1,11 +1,11 @@
 "use client";
 
 import React, { FC, PropsWithChildren, useEffect, useState } from "react";
-import { Tabs } from "flowbite-react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/hooks";
 import { getUsersList } from "@/redux/features/users/reducer";
 import { TUsersParams } from "@/shared/types/customTypes";
+import { Box, Tab, Tabs } from "@mui/material";
 
 const Filters: FC<PropsWithChildren> = ({ children }) => {
   const searchParams = useSearchParams();
@@ -24,7 +24,7 @@ const Filters: FC<PropsWithChildren> = ({ children }) => {
     { id: "budjetnyi", title: "Бюджетный кодекс" },
   ];
 
-  const onChangeTab = (tab: number) => {
+  const onChangeTab = (event: React.SyntheticEvent, tab: number) => {
     setActiveTab(tab);
   };
 
@@ -41,13 +41,14 @@ const Filters: FC<PropsWithChildren> = ({ children }) => {
   }, [activeTab]);
 
   return (
-    <Tabs onActiveTabChange={onChangeTab} aria-label="Pills" style="pills">
-      {filtersData.map(({ id, title }) => (
-        <Tabs.Item key={id} active title={title}>
-          {children}
-        </Tabs.Item>
-      ))}
-    </Tabs>
+    <div>
+      <Tabs onChange={onChangeTab}>
+        {filtersData.map(({ id, title }) => (
+          <Tab sx={{ color: "white" }} key={id} label={title} />
+        ))}
+      </Tabs>
+      <Box mt={2}>{children}</Box>
+    </div>
   );
 };
 

@@ -1,4 +1,8 @@
-import { SpecializationEnum, UserTypeEnum } from "@/shared/types/aijusrist";
+import {
+  SpecializationEnum,
+  StatusEnum,
+  UserTypeEnum,
+} from "@/shared/types/aijusrist";
 
 export type TAccount = {
   access: string;
@@ -12,4 +16,8 @@ export type TAccount = {
 export type TUsersParams = {
   user_type?: UserTypeEnum;
   specialization?: SpecializationEnum;
+};
+
+export type TConsultationParams = {
+  status?: StatusEnum;
 };

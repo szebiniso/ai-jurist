@@ -1,28 +1,33 @@
 import React, { FC } from "react";
-import { TextField } from "@mui/material";
+import { InputProps, TextField } from "@mui/material";
 import { Control, Controller } from "react-hook-form";
 
 type TProps = {
   label: string;
-  name: string;
-  placeholder: string;
   control: Control<any>;
 };
 
-const Input: FC<TProps> = ({ label, placeholder, name, control }) => {
+const Input: FC<TProps & InputProps> = ({
+  label,
+  placeholder,
+  name,
+  control,
+  type,
+}) => {
   return (
     <div className="flex flex-col gap-2">
       <label className="text-c-white" htmlFor={name}>
         {label}
       </label>
       <Controller
-        name={name}
+        name={name!}
         control={control}
         render={({ field, fieldState }) => (
           <>
             <TextField
               {...field}
               id={name}
+              type={type}
               name={name}
               placeholder={placeholder}
               style={{

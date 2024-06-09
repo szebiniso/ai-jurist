@@ -5,7 +5,7 @@ import { useAppDispatch } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
 
 const AuthRedirectProvider = ({ children }: { children: ReactNode }) => {
-  const redirect = useAuthRedirect(location);
+  const redirect = useAuthRedirect();
   const dispatch = useAppDispatch();
   // if (localStorage.getItem("account")) {
   //   dispatch(restoreSession());

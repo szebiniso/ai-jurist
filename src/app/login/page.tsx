@@ -24,8 +24,12 @@ const Login = () => {
   const onLogin = (data: LoginUser) => {
     dispatch(login(data))
       .unwrap()
-      .then(() => {
-        router.push("/experts");
+      .then((res) => {
+        if (res.data.user_role === "client") {
+          router.push("/chat");
+        } else {
+          router.push("/appointments");
+        }
       });
   };
 

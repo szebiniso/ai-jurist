@@ -10,6 +10,7 @@ import { RootState } from "@/redux/store";
 import { addConsultation } from "@/redux/features/consultation/reducer";
 import CModal from "@/components/UI/Modal";
 import { toastError, toastSuccess } from "@/components/Toasts/toastify";
+import { Form } from "react-hook-form";
 
 const Expert = () => {
   const { id } = useParams();
@@ -52,7 +53,6 @@ const Expert = () => {
     <>
       <div className="bg-black h-screen">
         <Header />
-
         <div className="w-full flex flex-col items-center">
           <div className="flex gap-6 w-8/12">
             <div className="flex flex-col gap-4">
@@ -79,11 +79,7 @@ const Expert = () => {
           </div>
         </div>
       </div>
-      <CModal
-        open={openModal}
-        closeModal={handleCloseModal}
-        title="Add appointment"
-      >
+      <CModal open={openModal} closeModal={handleCloseModal}>
         <div className="flex flex-col gap-4">
           <h2 className="text-white text-2xl text-center">Add appointment</h2>
           <textarea
