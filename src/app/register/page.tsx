@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import Input from "@/components/UI/Input";
 import Button from "@/components/UI/Button";
+import { useForm } from "react-hook-form";
 
 const fields = [
   { name: "name", label: "Имя", placeholder: "Name" },
@@ -15,6 +16,7 @@ const fields = [
 ];
 
 const Register = () => {
+  const { control } = useForm();
   return (
     <main className="bg-black h-screen flex justify-center">
       <Link href="/">
@@ -33,6 +35,7 @@ const Register = () => {
           <div className="flex flex-col gap-2 mb-6">
             {fields.map(({ name, label, placeholder }) => (
               <Input
+                control={control}
                 key={name}
                 label={label}
                 name={name}
