@@ -20,7 +20,8 @@ const authSlice = createSlice({
     setToken: (state, action) => {
       if (state.account) {
         state.account = { ...state.account, ...action.payload };
-        localStorage.setItem("access", action.payload.access);
+        typeof window !== "undefined" &&
+          localStorage.setItem("access", action.payload.access);
       }
     },
   },
