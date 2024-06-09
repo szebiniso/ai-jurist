@@ -33,15 +33,15 @@ const Register = () => {
         <form className="w-full">
           <p className="text-2xl text-c-white text-center mb-6">Регистрация</p>
           <div className="flex flex-col gap-2 mb-6">
-            {fields.map(({ name, label, placeholder }) => (
-              <Input
-                control={control}
-                key={name}
-                label={label}
-                name={name}
-                placeholder={placeholder}
-              />
-            ))}
+            {/*{fields.map(({ name, label, placeholder }) => (*/}
+            {/*  <Input*/}
+            {/*    control={control}*/}
+            {/*    key={name}*/}
+            {/*    label={label}*/}
+            {/*    name={name}*/}
+            {/*    placeholder={placeholder}*/}
+            {/*  />*/}
+            {/*))}*/}
           </div>
           <Button text="Зарегистрироваться" />
           <div className="flex justify-between text-c-gray text-sm mt-12 font-light">
