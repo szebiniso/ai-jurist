@@ -13,6 +13,22 @@ export enum BlankEnum {
   Value = "",
 }
 
+export interface ChatMessage {
+  id: number;
+  user: User;
+  room?: number | null;
+  user_input: string;
+  bot_response: string;
+  /** @format date-time */
+  timestamp: string;
+}
+
+export interface ChatRoom {
+  id: number;
+  /** @maxLength 100 */
+  name: string;
+}
+
 export interface Consultation {
   id: number;
   client: number;
@@ -26,6 +42,14 @@ export interface Consultation {
    * * `Отклонено` - Отклонено
    */
   status?: StatusEnum;
+  /** @format date-time */
+  meeting_time?: string | null;
+  /**
+   * @format uri
+   * @maxLength 200
+   */
+  meeting_link?: string | null;
+  reason?: string | null;
 }
 
 /** Login user serializer */
@@ -41,6 +65,22 @@ export interface LoginUser {
 
 export type NullEnum = null;
 
+export interface PatchedChatMessage {
+  id?: number;
+  user?: User;
+  room?: number | null;
+  user_input?: string;
+  bot_response?: string;
+  /** @format date-time */
+  timestamp?: string;
+}
+
+export interface PatchedChatRoom {
+  id?: number;
+  /** @maxLength 100 */
+  name?: string;
+}
+
 export interface PatchedConsultation {
   id?: number;
   client?: number;
@@ -54,6 +94,14 @@ export interface PatchedConsultation {
    * * `Отклонено` - Отклонено
    */
   status?: StatusEnum;
+  /** @format date-time */
+  meeting_time?: string | null;
+  /**
+   * @format uri
+   * @maxLength 200
+   */
+  meeting_link?: string | null;
+  reason?: string | null;
 }
 
 /** User registration serializer */
@@ -264,8 +312,8 @@ export class HttpClient<SecurityDataType = unknown> {
           property instanceof Blob
             ? property
             : typeof property === "object" && property !== null
-            ? JSON.stringify(property)
-            : `${property}`,
+              ? JSON.stringify(property)
+              : `${property}`,
         );
         return formData;
       }, new FormData()),
@@ -338,7 +386,7 @@ export class HttpClient<SecurityDataType = unknown> {
       signal: (cancelToken ? this.createAbortSignal(cancelToken) : requestParams.signal) || null,
       body: typeof body === "undefined" || body === null ? null : payloadFormatter(body),
     }).then(async (response) => {
-      const r = response as HttpResponse<T, E>;
+      const r = response.clone() as HttpResponse<T, E>;
       r.data = null as unknown as T;
       r.error = null as unknown as E;
 
@@ -375,6 +423,228 @@ export class HttpClient<SecurityDataType = unknown> {
  * API for AI-Jurist platform
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+  chat = {
+    /**
+     * No description
+     *
+     * @tags chat
+     * @name ChatChatbotList
+     * @request GET:/chat/chatbot/
+     * @secure
+     */
+    chatChatbotList: (
+      query?: {
+        room?: number;
+        user?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<ChatMessage[], any>({
+        path: `/chat/chatbot/`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags chat
+     * @name ChatChatbotCreate
+     * @request POST:/chat/chatbot/
+     * @secure
+     */
+    chatChatbotCreate: (data: ChatMessage, params: RequestParams = {}) =>
+      this.request<ChatMessage, any>({
+        path: `/chat/chatbot/`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags chat
+     * @name ChatChatbotRetrieve
+     * @request GET:/chat/chatbot/{id}/
+     * @secure
+     */
+    chatChatbotRetrieve: (id: number, params: RequestParams = {}) =>
+      this.request<ChatMessage, any>({
+        path: `/chat/chatbot/${id}/`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags chat
+     * @name ChatChatbotUpdate
+     * @request PUT:/chat/chatbot/{id}/
+     * @secure
+     */
+    chatChatbotUpdate: (id: number, data: ChatMessage, params: RequestParams = {}) =>
+      this.request<ChatMessage, any>({
+        path: `/chat/chatbot/${id}/`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags chat
+     * @name ChatChatbotPartialUpdate
+     * @request PATCH:/chat/chatbot/{id}/
+     * @secure
+     */
+    chatChatbotPartialUpdate: (id: number, data: PatchedChatMessage, params: RequestParams = {}) =>
+      this.request<ChatMessage, any>({
+        path: `/chat/chatbot/${id}/`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags chat
+     * @name ChatChatbotDestroy
+     * @request DELETE:/chat/chatbot/{id}/
+     * @secure
+     */
+    chatChatbotDestroy: (id: number, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/chat/chatbot/${id}/`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags chat
+     * @name ChatChatroomList
+     * @request GET:/chat/chatroom/
+     * @secure
+     */
+    chatChatroomList: (params: RequestParams = {}) =>
+      this.request<ChatRoom[], any>({
+        path: `/chat/chatroom/`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags chat
+     * @name ChatChatroomCreate
+     * @request POST:/chat/chatroom/
+     * @secure
+     */
+    chatChatroomCreate: (data: ChatRoom, params: RequestParams = {}) =>
+      this.request<ChatRoom, any>({
+        path: `/chat/chatroom/`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags chat
+     * @name ChatChatroomRetrieve
+     * @request GET:/chat/chatroom/{id}/
+     * @secure
+     */
+    chatChatroomRetrieve: (id: number, params: RequestParams = {}) =>
+      this.request<ChatRoom, any>({
+        path: `/chat/chatroom/${id}/`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags chat
+     * @name ChatChatroomUpdate
+     * @request PUT:/chat/chatroom/{id}/
+     * @secure
+     */
+    chatChatroomUpdate: (id: number, data: ChatRoom, params: RequestParams = {}) =>
+      this.request<ChatRoom, any>({
+        path: `/chat/chatroom/${id}/`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags chat
+     * @name ChatChatroomPartialUpdate
+     * @request PATCH:/chat/chatroom/{id}/
+     * @secure
+     */
+    chatChatroomPartialUpdate: (id: number, data: PatchedChatRoom, params: RequestParams = {}) =>
+      this.request<ChatRoom, any>({
+        path: `/chat/chatroom/${id}/`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags chat
+     * @name ChatChatroomDestroy
+     * @request DELETE:/chat/chatroom/{id}/
+     * @secure
+     */
+    chatChatroomDestroy: (id: number, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/chat/chatroom/${id}/`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+  };
   consultations = {
     /**
      * No description
@@ -384,10 +654,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/consultations/consultations/
      * @secure
      */
-    consultationsConsultationsList: (params: RequestParams = {}) =>
+    consultationsConsultationsList: (
+      query?: {
+        /**
+         * * `На рассмотрении` - На рассмотрении
+         * * `Принято` - Принято
+         * * `Отклонено` - Отклонено
+         */
+        status?: "На рассмотрении" | "Отклонено" | "Принято";
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<Consultation[], any>({
         path: `/consultations/consultations/`,
         method: "GET",
+        query: query,
         secure: true,
         format: "json",
         ...params,

@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 
 const arr = [
   "Explain quantum computing in simple terms",
@@ -8,6 +11,8 @@ const arr = [
 ];
 
 const ChatPanel = () => {
+  const searchParams = useSearchParams();
+
   return (
     <div className="flex justify-center items-end h-full">
       <div className="flex flex-col gap-28 w-10/12">
