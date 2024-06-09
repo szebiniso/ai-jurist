@@ -7,12 +7,11 @@ import Link from "next/link";
 
 const Categories = () => {
   return (
-    <div className="bg-black h-fit">
+    <div className="bg-black h-screen">
       <Header />
       <div className="w-full flex flex-col items-center">
         <div className="w-10/12">
-          <Filters />
-          <div className="flex gap-10 flex-wrap justify-between my-16">
+          <div className="flex gap-10 flex-wrap my-16">
             {categoriesList.map((category) => (
               <Card key={category.id} category={category} />
             ))}
