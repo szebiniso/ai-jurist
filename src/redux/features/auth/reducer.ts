@@ -11,9 +11,9 @@ export const login = createAsyncThunk(
     try {
       const response = await api.auth.login(data);
       typeof window !== "undefined" &&
-        localStorage.setItem("access", response.data.access);
+        localStorage?.setItem("access", response.data.access);
       typeof window !== "undefined" &&
-        localStorage.setItem("account", JSON.stringify(response.data));
+        localStorage?.setItem("account", JSON.stringify(response.data));
       toastSuccess("You successfully logged in!");
       return response;
     } catch (error) {

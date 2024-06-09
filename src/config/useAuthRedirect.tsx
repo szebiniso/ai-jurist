@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 export const useAuthRedirect = () => {
   const pathname = usePathname();
-  const storedAccount = localStorage.getItem("account");
+  const storedAccount = localStorage?.getItem("account");
   const profile = storedAccount
     ? (JSON.parse(storedAccount) as TAccount)
     : null;

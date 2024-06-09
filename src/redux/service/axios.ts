@@ -14,7 +14,7 @@ export const client = axios.create({
 });
 
 client.interceptors.request.use((config) => {
-  const access = localStorage.getItem("access") || null;
+  const access = localStorage?.getItem("access") || null;
   if (access) {
     config.headers.Authorization = `Bearer ${access}`;
   }
@@ -32,7 +32,7 @@ client.interceptors.response.use(
       error.response.status === 401 &&
       !error.request?.responseURL?.includes("refresh")
     ) {
-      const refreshToken = localStorage.getItem("refresh") || null;
+      const refreshToken = localStorage?.getItem("refresh") || null;
       if (
         !refreshToken ||
         refreshToken === "null" ||
