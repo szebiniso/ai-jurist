@@ -17,13 +17,13 @@ const authSlice = createSlice({
   reducers: {
     logout(state) {
       state.account = null;
-      localStorage?.clear();
+      localStorage.clear();
     },
     setToken: (state, action) => {
       if (state.account) {
         state.account = { ...state.account, ...action.payload };
         typeof window !== "undefined" &&
-          localStorage?.setItem("access", action.payload.access);
+          localStorage.setItem("access", action.payload.access);
       }
     },
   },

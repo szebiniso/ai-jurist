@@ -27,8 +27,13 @@ const ChatPanel = () => {
   const [localSendMessage, setLocalSendMessage] = useState<string>("");
   const dispatch = useAppDispatch();
   const room_id = searchParams.get("room");
-  const account = JSON.parse(localStorage?.getItem("account")!);
+  const [account, setAccount] = useState<any>();
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (typeof window === undefined) return;
+    setAccount(JSON.parse(localStorage.getItem("account")!));
+  }, []);
 
   const sendMessage = () => {
     const data = {

@@ -2,10 +2,16 @@
 
 import { TAccount } from "@/shared/types/customTypes";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export const useAuthRedirect = () => {
   const pathname = usePathname();
-  const storedAccount = localStorage?.getItem("account");
+  const [storedAccount, setStoredAccount] = useState<any>();
+  // const storedAccount = localStorage.getItem("account");
+  useEffect(() => {
+    if (typeof window === undefined) return;
+    setStoredAccount(JSON.parse(localStorage.getItem("account")!));
+  }, []);
   const profile = storedAccount
     ? (JSON.parse(storedAccount) as TAccount)
     : null;
