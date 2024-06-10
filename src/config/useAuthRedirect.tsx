@@ -10,7 +10,7 @@ export const useAuthRedirect = () => {
   // const storedAccount = localStorage.getItem("account");
   useEffect(() => {
     if (typeof window === undefined) return;
-    setStoredAccount(JSON.parse(localStorage.getItem("account")!));
+    setStoredAccount(localStorage.getItem("account")!);
   }, []);
   const profile = storedAccount
     ? (JSON.parse(storedAccount) as TAccount)
@@ -19,8 +19,8 @@ export const useAuthRedirect = () => {
   const pagesWithoutAuth = ["/login", "/register", "/"];
 
   if (profile == null) {
-    // if (pagesWithoutAuth.includes(pathname)) return;
-    // return "/login";
+    if (pagesWithoutAuth.includes(pathname)) return;
+    return "/login";
   } else if (pathname === "/login") {
     if (profile.user_role === "client") {
       return "/chat";
