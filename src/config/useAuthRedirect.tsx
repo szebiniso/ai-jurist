@@ -19,9 +19,8 @@ export const useAuthRedirect = () => {
   const pagesWithoutAuth = ["/login", "/register", "/"];
 
   if (profile == null) {
-    if (pagesWithoutAuth.includes(pathname)) return;
-
-    return "/login";
+    // if (pagesWithoutAuth.includes(pathname)) return;
+    // return "/login";
   } else if (pathname === "/login") {
     if (profile.user_role === "client") {
       return "/chat";

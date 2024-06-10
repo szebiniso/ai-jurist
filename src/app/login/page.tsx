@@ -25,12 +25,12 @@ const Login = () => {
     dispatch(login(data))
       .unwrap()
       .then((res) => {
-        router.push("/chat");
-        // if (res.data.user_role === "client") {
-        //   router.push("/chat");
-        // } else {
-        //   router.push("/appointments");
-        // }
+        // router.push("/chat");
+        if (res.data.user_role === "client") {
+          router.push("/chat");
+        } else {
+          router.push("/appointments");
+        }
       });
   };
 
