@@ -12,7 +12,7 @@ export const useAuthRedirect = () => {
     if (typeof window === undefined) return;
     setStoredAccount(JSON.parse(localStorage.getItem("account")!));
   }, []);
-  const profile = storedAccount;
+  const profile = storedAccount ? storedAccount : null;
 
   const pagesWithoutAuth = ["/login", "/register", "/"];
 
