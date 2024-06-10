@@ -64,22 +64,24 @@ const ChatPanel = () => {
       <div className="flex flex-col gap-4 w-10/12">
         <div>
           {chatMessagesList.length || localSendMessage.length ? (
-            <div className="flex items-end h-[450px] overflow-auto">
-              <div className="w-full flex flex-col gap-24">
+            <div className="flex items-end h-[480px]">
+              <div className="flex w-full h-full overflow-auto pt-20 flex-col gap-24">
                 {chatMessagesList.map((message) => (
                   <div key={message.id}>
-                    <p className="px-4 py-2 bg-blue-400 float-end rounded-xl -my-16 max-w-[75%] w-fit">
+                    <p className="px-4 py-2 bg-gray-700 text-white text-base float-end rounded-xl -my-16 max-w-[75%] w-fit">
                       {message.user_input}
                     </p>
-                    <p className="px-4 py-2 bg-blue-500 float-start rounded-xl max-w-[75%] w-fit">
+                    <p className="px-4 py-2 bg-gray-800 text-white text-base float-start rounded-xl max-w-[75%] w-fit">
                       {message.bot_response}
                     </p>
                   </div>
                 ))}
                 {localSendMessage && (
-                  <p className="px-4 py-4 bg-blue-400 float-end rounded-xl max-w-[75%] mt-20">
-                    {localSendMessage}
-                  </p>
+                  <div>
+                    <p className="px-4 py-2 bg-gray-800 text-white text-base float-end rounded-xl max-w-[75%] w-fit">
+                      {localSendMessage}
+                    </p>
+                  </div>
                 )}
               </div>
             </div>
