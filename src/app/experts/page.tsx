@@ -21,21 +21,19 @@ const Page = () => {
   }, []);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <div className="bg-black min-h-screen">
-        <Header />
-        <div className="w-full flex flex-col items-center">
-          <div className="w-10/12">
-            <Filters />
-            <div className="flex gap-8 flex-wrap my-16">
-              {usersList.map((expert) => (
-                <ExpertCard key={expert.id} expert={expert} />
-              ))}
-            </div>
+    <div className="bg-black min-h-screen">
+      <Header />
+      <div className="w-full flex flex-col items-center">
+        <div className="w-10/12">
+          <Filters />
+          <div className="flex gap-8 flex-wrap my-16">
+            {usersList.map((expert) => (
+              <ExpertCard key={expert.id} expert={expert} />
+            ))}
           </div>
         </div>
       </div>
-    </Suspense>
+    </div>
   );
 };
 
