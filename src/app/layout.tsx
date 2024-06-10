@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import AosRegistry from "@/config/AosRegistry";
 import ToastProvider from "@/providers/ToastProvider";
-import { ReactNode } from "react";
+import React, { ReactNode, Suspense } from "react";
 import AuthRedirectProvider from "@/providers/AuthRedirectProvider";
 
 const inter = Inter({ subsets: ["greek"] });
@@ -36,7 +36,9 @@ export default function RootLayout({
         <AosRegistry />
         <Providers>
           <AuthRedirectProvider>
-            <ToastProvider>{children}</ToastProvider>
+            <ToastProvider>
+              <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+            </ToastProvider>
           </AuthRedirectProvider>
         </Providers>
       </body>

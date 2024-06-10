@@ -156,86 +156,84 @@ const Appointment = () => {
   ];
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <div className="h-screen bg-black">
-        <Header />
-        <div className=" w-10/12 m-auto pt-10">
-          <div>
-            <Tabs onChange={onChangeTab}>
-              {filtersData.map(({ id, title }) => (
-                <Tab
-                  sx={{ color: "white", marginRight: "10px" }}
-                  className="text-white"
-                  key={id}
-                  label={title}
-                />
-              ))}
-            </Tabs>
-            <Box mt={2}>
-              <div>
-                <Table
-                  renderCell={renderCell}
-                  columns={tabContentHeads[activeTab]}
-                  data={consultationList}
-                />
-              </div>
-            </Box>
-          </div>
-
-          <CModal open={openAcceptModal} closeModal={toggleOpenAcceptModal}>
-            <form
-              onSubmit={handleSubmit(handleAccept)}
-              className="flex flex-col gap-4"
-            >
-              <h2 className="text-2xl text-center">Accept appointment</h2>
-              <Input
-                type="date"
-                name="meeting_date"
-                label="Meeting date"
-                control={control}
-                placeholder="Choose Meeting time"
+    <div className="h-screen bg-black">
+      <Header />
+      <div className=" w-10/12 m-auto pt-10">
+        <div>
+          <Tabs onChange={onChangeTab}>
+            {filtersData.map(({ id, title }) => (
+              <Tab
+                sx={{ color: "white", marginRight: "10px" }}
+                className="text-white"
+                key={id}
+                label={title}
               />
-              <Input
-                type="time"
-                name="meeting_time"
-                label="Meeting time"
-                control={control}
-                placeholder="Choose Meeting time"
+            ))}
+          </Tabs>
+          <Box mt={2}>
+            <div>
+              <Table
+                renderCell={renderCell}
+                columns={tabContentHeads[activeTab]}
+                data={consultationList}
               />
-              <Input
-                name="meeting_link"
-                label="Meeting link"
-                control={control}
-                placeholder="Add Meeting link"
-              />
-              <button
-                type="submit"
-                className="border-gray-900 p-4 bg-gray-700 text-white rounded-xl"
-              >
-                SEND
-              </button>
-            </form>
-          </CModal>
-          <CModal open={openRejectModal} closeModal={toggleOpenRejectModal}>
-            <div className="flex flex-col gap-4">
-              <h2 className="text-2xl text-center">Accept appointment</h2>
-              <textarea
-                className="rounded-xl p-4"
-                onChange={(e) => setReason(e.target.value)}
-                rows={4}
-              />
-              <button
-                disabled={!reason.length}
-                onClick={handleReject}
-                className="border-gray-900 p-4 bg-gray-700 text-white rounded-xl"
-              >
-                SEND
-              </button>
             </div>
-          </CModal>
+          </Box>
         </div>
+
+        <CModal open={openAcceptModal} closeModal={toggleOpenAcceptModal}>
+          <form
+            onSubmit={handleSubmit(handleAccept)}
+            className="flex flex-col gap-4"
+          >
+            <h2 className="text-2xl text-center">Accept appointment</h2>
+            <Input
+              type="date"
+              name="meeting_date"
+              label="Meeting date"
+              control={control}
+              placeholder="Choose Meeting time"
+            />
+            <Input
+              type="time"
+              name="meeting_time"
+              label="Meeting time"
+              control={control}
+              placeholder="Choose Meeting time"
+            />
+            <Input
+              name="meeting_link"
+              label="Meeting link"
+              control={control}
+              placeholder="Add Meeting link"
+            />
+            <button
+              type="submit"
+              className="border-gray-900 p-4 bg-gray-700 text-white rounded-xl"
+            >
+              SEND
+            </button>
+          </form>
+        </CModal>
+        <CModal open={openRejectModal} closeModal={toggleOpenRejectModal}>
+          <div className="flex flex-col gap-4">
+            <h2 className="text-2xl text-center">Accept appointment</h2>
+            <textarea
+              className="rounded-xl p-4"
+              onChange={(e) => setReason(e.target.value)}
+              rows={4}
+            />
+            <button
+              disabled={!reason.length}
+              onClick={handleReject}
+              className="border-gray-900 p-4 bg-gray-700 text-white rounded-xl"
+            >
+              SEND
+            </button>
+          </div>
+        </CModal>
       </div>
-    </Suspense>
+    </div>
   );
 };
 
